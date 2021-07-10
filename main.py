@@ -22,8 +22,6 @@ if len(sys.argv) == 2:
         tracker.run(interval)
     elif sys.argv[1] == "-d" or sys.argv[1] == "--delete":
         tracker.delete_price()
-    elif sys.argv[1] == "-5":
-        tracker.get_free_proxies()
     else:
         print("Unknown arg")
 elif len(sys.argv) > 2:
