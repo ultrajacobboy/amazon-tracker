@@ -84,11 +84,10 @@ class Amazon:
                     print("Invalid url")
                     print("Failed on price")
                     return
-        else:
-            print(f"Current price is {js_test.text}. What is the price goal?")
-            goal = input("> ")
-            js_test = js_test.text.replace("$", "")
-            js_test = js_test.replace(",", "")
+        print(f"Current price is {js_test.text}. What is the price goal?")
+        goal = input("> ")
+        js_test = js_test.text.replace("$", "")
+        js_test = js_test.replace(",", "")
             """
             new_dict = {
                             cleaned_link[0]: 
