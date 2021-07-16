@@ -29,7 +29,7 @@ class Proxy:
                 proxy = {"http": proxy, "https": proxy}
                 r = requests.get("https://httpbin.org/ip", proxies=proxy, timeout=1)
                 print(f"Works: {proxy}")
-                working.append(proxy)
+                working.append(proxy["http"])
             except:
                 pass
         return working
