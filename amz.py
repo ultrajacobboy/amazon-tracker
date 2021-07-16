@@ -88,7 +88,7 @@ class Amazon:
         goal = input("> ")
         js_test = js_test.text.replace("$", "")
         js_test = js_test.replace(",", "")
-            """
+        """
             new_dict = {
                             cleaned_link[0]: 
                                 {
@@ -98,17 +98,17 @@ class Amazon:
                                 }
                         }
                         """
-            with open(f'{script}\\data.json', "r") as f:
-                data = json.load(f)
-                f.close()
-            with open(f'{script}\\data.json', "w") as f:
-                data["links"][cleaned_link[0]] = {
-                                    "price_goal": goal,
-                                    "current": js_test,
-                                    "id": str(new_id)
-                                }
-                json.dump(data, f, ensure_ascii=False, indent=4)
-                f.close()
+        with open(f'{script}\\data.json', "r") as f:
+            data = json.load(f)
+            f.close()
+        with open(f'{script}\\data.json', "w") as f:
+            data["links"][cleaned_link[0]] = {
+                                "price_goal": goal,
+                                "current": js_test,
+                                "id": str(new_id)
+                            }
+            json.dump(data, f, ensure_ascii=False, indent=4)
+            f.close()
             print("Success!")
 
     def run(self, inter):
