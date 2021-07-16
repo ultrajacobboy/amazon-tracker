@@ -78,10 +78,12 @@ class Amazon:
         if js_test is None:
             js_test = soup.find('span', id="priceblock_saleprice")
             if js_test is None:
-                print(result.text)
-                print("Invalid url")
-                print("Failed on price")
-                return
+                js_test = soup.find('span', id="priceblock_pospromoprice")
+                if js_test is None:
+                    print(result.text)
+                    print("Invalid url")
+                    print("Failed on price")
+                    return
         else:
             print(f"Current price is {js_test.text}. What is the price goal?")
             goal = input("> ")
