@@ -128,30 +128,30 @@ class Amazon:
             proxies = proxy_var.get_proxies()
             print("Checking for valid proxies. This may take up to five minutes...")
             working = proxy_var.test()
-        
-        for key, value in data["links"].items():
-            if var.PROXY_REQUEST:
-                proxy = {"http": random.choice(working), "https": random.choice(working)}  
-                result = requests.get(key, headers=hdr, proxies=proxy)
-            else:
-                 result = requests.get(key, headers=hdr)
-            soup = BeautifulSoup(result.text, 'lxml')
-            js_test = soup.find('span', id="priceblock_ourprice")
-            try:
-                js_test = js_test.text.replace("$", "")
-            except:
-                print(result.text)
-            if js_test is None:
-                print("You're being ratelimited! Sleeping for 30 minutes.")
-                time.sleep(1800)
-            elif js_test <= data[key]["price_goal"]:
-                self.notify(key, js_test)
-            elif js_test >= data[key]["price_goal"]:
-                print("Price is up...")
-            else:
-                pass
+        while True:
+            for key, value in data["links"].items():
+                if var.PROXY_REQUEST:
+                    proxy = {"http": random.choice(working), "https": random.choice(working)}  
+                    result = requests.get(key, headers=hdr, proxies=proxy)
+                else:
+                     result = requests.get(key, headers=hdr)
+                soup = BeautifulSoup(result.text, 'lxml')
+                js_test = soup.find('span', id="priceblock_ourprice")
+                try:
+                    js_test = js_test.text.replace("$", "")
+                except:
+                    print(result.text)
+                if js_test is None:
+                    print("You're being ratelimited! Sleeping for 30 minutes.")
+                    time.sleep(1800)
+                elif js_test <= data[key]["price_goal"]:
+                    self.notify(key, js_test)
+                elif js_test >= data[key]["price_goal"]:
+                    print("Price is up...")
+                else:
+                    pass
 
-            time.sleep(inter * 60)
+                time.sleep(inter * 60)
 
     def delete_price(self):
         flag = False
